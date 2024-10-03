@@ -1,0 +1,113 @@
+/* إعدادات عامة للنماذج */
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: #f7f8fc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.form-container {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+.form-container h2 {
+    font-family: 'Amiri', serif;
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* حقول الإدخال */
+.form-container input[type="email"],
+.form-container input[type="password"],
+.form-container input[type="text"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 10px 0;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.form-container input:focus {
+    border-color: #7a5cfa;
+    outline: none;
+    background-color: #fff;
+}
+
+/* زر الدخول */
+.form-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #7a5cfa;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+}
+
+.form-container button:hover {
+    background-color: #6849d1;
+    transform: scale(1.02);
+}
+
+/* الروابط */
+.form-container p {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #666;
+}
+
+.form-container p a {
+    color: #7a5cfa;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.form-container p a:hover {
+    color: #6849d1;
+}
+
+/* صندوق إدخال كلمة المرور */
+.form-container input[type="password"] {
+    font-family: 'Cairo', sans-serif;
+    letter-spacing: 1px; /* لإضفاء شكل حديث على إدخال كلمة المرور */
+}
+
+/* تصميم الوضع الليلي */
+body.dark-mode {
+    background-color: #2d2d2d;
+}
+
+body.dark-mode .form-container {
+    background-color: #333;
+    color: #f1f1f1;
+}
+
+body.dark-mode .form-container input {
+    background-color: #444;
+    color: #fff;
+    border-color: #555;
+}
+
+body.dark-mode .form-container button {
+    background-color: #7a5cfa;
+}
+
+body.dark-mode .form-container button:hover {
+    background-color: #6849d1;
+}
