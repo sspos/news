@@ -9,13 +9,17 @@
     <script defer src="auth.js"></script>
 </head>
 <body>
+    
+    <div class="form-container">
     <h2>تسجيل الدخول</h2>
     <form id="login-form">
-        <label for="email">البريد الإلكتروني</label>
-        <input type="email" id="email" required>
-        <label for="password">كلمة المرور</label>
-        <input type="password" id="password" required>
+        <input type="email" id="email" placeholder="البريد الإلكتروني" required>
+        <input type="password" id="password" placeholder="كلمة المرور" required>
         <button type="submit">تسجيل الدخول</button>
     </form>
+    <p>ليس لديك حساب؟ <a href="signup.html">إنشاء حساب</a></p>
+    </div>
+
+    
 </body>
 </html>
