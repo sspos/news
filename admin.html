@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نشر خبر</title>
+    <script defer src="firebase-config.js"></script>
+    <script defer src="admin.js"></script>
+</head>
+<body>
+    <h2>نشر خبر جديد</h2>
+    <form id="news-form">
+        <label for="title">عنوان الخبر</label>
+        <input type="text" id="title" required>
+        <label for="content">محتوى الخبر</label>
+        <textarea id="content" required></textarea>
+        <button type="submit">نشر الخبر</button>
+    </form>
+</body>
+</html>
