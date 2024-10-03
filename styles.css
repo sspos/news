@@ -193,3 +193,125 @@ footer {
     color: #f3f3f3;
     box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
 }
+
+
+
+/* تصميم صفحة تسجيل الدخول وإنشاء الحساب */
+.form-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.form-container h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.form-container input[type="email"],
+.form-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background-color: #f3f3f3;
+    font-size: 16px;
+    transition: border 0.3s ease;
+}
+
+.form-container input:focus {
+    border-color: #7a5cfa;
+    outline: none;
+}
+
+.form-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #7a5cfa;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 10px;
+}
+
+.form-container button:hover {
+    background-color: #6849d1;
+    box-shadow: 0 5px 15px rgba(122, 92, 250, 0.3);
+}
+
+.form-container p {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #555;
+}
+
+.form-container p a {
+    color: #7a5cfa;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.form-container p a:hover {
+    color: #6849d1;
+}
+
+/* إضافة تأثيرات سحرية */
+.form-container {
+    position: relative;
+    background: linear-gradient(135deg, #fdfbfb, #ebedee);
+}
+
+.form-container::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: linear-gradient(45deg, rgba(122, 92, 250, 0.2), transparent);
+    border-radius: 12px;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+}
+
+.form-container:hover::before {
+    opacity: 0.5;
+}
+
+/* الوضع الليلي لصفحات تسجيل الدخول وإنشاء الحساب */
+body.dark-mode .form-container {
+    background-color: #222;
+    color: #eee;
+    border: 1px solid rgba(122, 92, 250, 0.4);
+}
+
+body.dark-mode .form-container input {
+    background-color: #333;
+    border-color: #444;
+    color: #eee;
+}
+
+body.dark-mode .form-container input:focus {
+    border-color: #7a5cfa;
+}
+
+body.dark-mode .form-container button {
+    background-color: #7a5cfa;
+}
+
+body.dark-mode .form-container button:hover {
+    background-color: #6849d1;
+}
+
+body.dark-mode .form-container p a {
+    color: #7a5cfa;
+}
