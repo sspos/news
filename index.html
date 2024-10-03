@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع الأخبار</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="firebase-config.js"></script>
+    <script defer src="app.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+    <h1>موقع الأخبار</h1>
+    <ul id="nav-links">
+        <li><a href="index.html">الرئيسية</a></li>
+        <li id="admin-link" style="display:none;"><a href="admin.html">نشر خبر</a></li>
+        <li><a href="login.html">تسجيل الدخول</a></li>
+        <li><a href="signup.html">إنشاء حساب</a></li>
+    </ul>
+</nav>
+
+<script>
+// التحقق من حالة الأدمن بعد تسجيل الدخول
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    db.collection('users').doc(user.uid).get().then((doc) => {
+      if (doc.exists && doc.data().isAdmin) {
+        // إظهار رابط نشر الأخبار إذا كان المستخدم أدمن
+        document.getElementById('admin-link').style.display = 'block';
+      }
+    });
+  }
+});
+</script>
+    </header>
+
+    <main>
+        <section id="news-section">
+            <h2>الأخبار</h2>
+            <div id="news-container"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>جميع الحقوق محفوظة © 2024</p>
+    </footer>
+</body>
+</html>
