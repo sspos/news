@@ -1,39 +1,33 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <link rel="stylesheet" href="login.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تسجيل الدخول</title>
-    <script defer src="firebase-config.js"></script>
-    <script defer src="auth.js"></script>
+    
+    <!-- استدعاء CSS -->
+    <link rel="stylesheet" href="login.css">
 
-    
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    
+    <!-- Firebase SDKs -->
+    <script defer src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
     <!-- رابط ملف firebase-config.js -->
-    <script src="firebase-config.js"></script>
-    
-    
+    <script defer src="firebase-config.js"></script>
+
+    <!-- رابط ملف auth.js -->
+    <script defer src="auth.js"></script>
 </head>
 <body>
-    
     <div class="form-container">
-    <h2>تسجيل الدخول</h2>
-    <form id="login-form">
-        <input type="email" id="email" placeholder="البريد الإلكتروني" required>
-        <input type="password" id="password" placeholder="كلمة المرور" required>
-        <button type="submit">تسجيل الدخول</button>
-    </form>
-    <p>ليس لديك حساب؟ <a href="signup.html">إنشاء حساب</a></p>
+        <h2>تسجيل الدخول</h2>
+        <form id="login-form">
+            <input type="email" id="email" placeholder="البريد الإلكتروني" required>
+            <input type="password" id="password" placeholder="كلمة المرور" required>
+            <button type="submit">تسجيل الدخول</button>
+        </form>
+        <p>ليس لديك حساب؟ <a href="signup.html">إنشاء حساب</a></p>
     </div>
-
-
-    
-    <script src="auth.js"></script>
-
-    
 </body>
 </html>
