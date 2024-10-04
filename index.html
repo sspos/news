@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,74 +12,59 @@
     <!-- إضافة رابط الخط من Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <header>
-        <nav>
-            <h1>الموقع الرسمي لوكالة سبوس الأخبارية</h1>
-            <ul id="nav-links">
-                <li><a href="index.html">الرئيسية</a></li>
-                <li id="admin-link" style="display:none;"><a href="admin.html">نشر خبر</a></li>
-                <li id="login-link"><a href="login.html">تسجيل الدخول</a></li>
-                <li id="signup-link"><a href="signup.html">إنشاء حساب</a></li>
-            </ul>
-        </nav>
-
-        <script>
-            // التحقق من حالة الأدمن بعد تسجيل الدخول
-            firebase.auth().onAuthStateChanged((user) => {
-                if (user) {
-                    db.collection('users').doc(user.uid).get().then((doc) => {
-                        if (doc.exists && doc.data().isAdmin) {
-                            // إظهار رابط نشر الأخبار إذا كان المستخدم أدمن
-                            document.getElementById('admin-link').style.display = 'block';
-                        }
-                    });
-
-                    // إخفاء رابط تسجيل الدخول وإنشاء حساب عند تسجيل الدخول
-                    document.getElementById('login-link').style.display = 'none';
-                    document.getElementById('signup-link').style.display = 'none';
-                }
-            });
-        </script>
+        <div class="header-container">
+            <h1>وكالة سبوس الإخبارية</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">الرئيسية</a></li>
+                    <li><a href="#">الأخبار</a></li>
+                    <li><a href="#">مقالات</a></li>
+                    <li><a href="#">اتصل بنا</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <main>
-        <section id="news-section">
-            <h2>الأخبار</h2>
-            <div id="news-container"></div>
+        <section class="headline-news">
+            <h2>أهم الأخبار</h2>
+            <article>
+                <h3>عنوان الخبر الرئيسي</h3>
+                <p>ملخص للخبر الرئيسي الذي يعرض أهم التفاصيل بشكل مختصر لجذب القراء.</p>
+                <a href="#" class="read-more">اقرأ المزيد</a>
+            </article>
+        </section>
+
+        <section class="latest-news">
+            <h2>آخر الأخبار</h2>
+            <div class="news-grid">
+                <article>
+                    <h3>عنوان الخبر</h3>
+                    <p>ملخص سريع للخبر.</p>
+                    <a href="#" class="read-more">اقرأ المزيد</a>
+                </article>
+                <article>
+                    <h3>عنوان الخبر</h3>
+                    <p>ملخص سريع للخبر.</p>
+                    <a href="#" class="read-more">اقرأ المزيد</a>
+                </article>
+                <article>
+                    <h3>عنوان الخبر</h3>
+                    <p>ملخص سريع للخبر.</p>
+                    <a href="#" class="read-more">اقرأ المزيد</a>
+                </article>
+            </div>
         </section>
     </main>
 
     <footer>
-        <p>جميع الحقوق محفوظة لوكالة سبوس الأخبارية © 2024</p>
+        <div class="footer-container">
+            <p>حقوق النشر © 2024 وكالة سبوس الأخبارية. جميع الحقوق محفوظة.</p>
+        </div>
     </footer>
-
-    <script>
-        // تحميل الأخبار من Firestore
-        function loadNews() {
-            const newsContainer = document.getElementById('news-container');
-            newsContainer.innerHTML = ''; // تفريغ المحتوى السابق
-
-            db.collection('news').orderBy('timestamp', 'desc').get().then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    const newsItem = doc.data();
-                    const newsDiv = document.createElement('div');
-                    newsDiv.classList.add('news-item');
-
-                    newsDiv.innerHTML = `
-                        <h3>${newsItem.title}</h3>
-                        <p>${newsItem.content}</p>
-                        <hr>
-                    `;
-                    newsContainer.appendChild(newsDiv);
-                });
-            }).catch((error) => {
-                console.error("خطأ في تحميل الأخبار: ", error);
-            });
-        }
-
-        // استدعاء الدالة لتحميل الأخبار عند تحميل الصفحة
-        window.onload = loadNews;
-    </script>
 </body>
+
 </html>
