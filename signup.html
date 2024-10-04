@@ -9,16 +9,16 @@
     <link rel="stylesheet" href="login.css">
 
     <!-- Firebase SDKs -->
-    <script defer src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
-    <script defer src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
-    <script defer src="https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js"></script>
 
     <!-- رابط ملف firebase-config.js -->
-    <script defer src="firebase-config.js"></script>
+    <script src="firebase-config.js" defer></script>
 </head>
 <body>
     <div class="form-container">
-        <h2>إنشاء  fuck you حساب</h2>
+        <h2>إنشاء حساب</h2>
         <form id="signup-form">
             <input type="text" id="username" placeholder="اسم المستخدم" required>
             <input type="email" id="email" placeholder="البريد الإلكتروني" required>
@@ -28,13 +28,15 @@
         <p>لديك حساب؟ <a href="login.html">تسجيل الدخول</a></p>
     </div>
 
-    <script>
+    <script defer>
+        // إعداد Firebase
+        const app = firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
 
         const signupForm = document.getElementById('signup-form');
         signupForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+            e.preventDefault(); // منع إعادة تحميل الصفحة
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
