@@ -15,13 +15,8 @@
 
     <!-- رابط ملف firebase-config.js -->
     <script defer src="firebase-config.js"></script>
-
-    <!-- رابط ملف auth.js -->
-    <script defer src="auth.js"></script>
-
 </head>
 <body>
-
     <div class="form-container">
         <h2>إنشاء حساب</h2>
         <form id="signup-form">
@@ -33,5 +28,33 @@
         <p>لديك حساب؟ <a href="login.html">تسجيل الدخول</a></p>
     </div>
 
+    <script>
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        const signupForm = document.getElementById('signup-form');
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            auth.createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    const userId = userCredential.user.uid;
+
+                    // افتراضياً، ليس كل مستخدم أدمن، يتم إضافة المستخدم إلى Firestore
+                    db.collection('users').doc(userId).set({
+                        email: email,
+                        isAdmin: false  // نبدأ بالحقل الافتراضي كمستخدم عادي
+                    }).then(() => {
+                        alert("تم إنشاء الحساب بنجاح!");
+                        window.location.href = "index.html"; // إعادة التوجيه للصفحة الرئيسية
+                    });
+                })
+                .catch((error) => {
+                    alert("حدث خطأ أثناء إنشاء الحساب: " + error.message);
+                });
+        });
+    </script>
 </body>
 </html>
