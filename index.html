@@ -52,5 +52,33 @@
     <footer>
         <p>جميع الحقوق محفوظة لوكالة سبوس الأخبارية © 2024</p>
     </footer>
+
+    <script>
+        // تحميل الأخبار من Firestore
+        function loadNews() {
+            const newsContainer = document.getElementById('news-container');
+            newsContainer.innerHTML = ''; // تفريغ المحتوى السابق
+
+            db.collection('news').orderBy('timestamp', 'desc').get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    const newsItem = doc.data();
+                    const newsDiv = document.createElement('div');
+                    newsDiv.classList.add('news-item');
+
+                    newsDiv.innerHTML = `
+                        <h3>${newsItem.title}</h3>
+                        <p>${newsItem.content}</p>
+                        <hr>
+                    `;
+                    newsContainer.appendChild(newsDiv);
+                });
+            }).catch((error) => {
+                console.error("خطأ في تحميل الأخبار: ", error);
+            });
+        }
+
+        // استدعاء الدالة لتحميل الأخبار عند تحميل الصفحة
+        window.onload = loadNews;
+    </script>
 </body>
 </html>
