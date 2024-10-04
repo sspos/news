@@ -1,9 +1,11 @@
+// app.js
+
 const loadNews = () => {
   const newsContainer = document.getElementById('news-container');
-  
-  // جلب الأخبار وترتيبها حسب timestamp (التاريخ)
+  newsContainer.innerHTML = ''; // تفريغ المحتوى السابق
+
+  // تحميل الأخبار من Firestore
   db.collection('news').orderBy('timestamp', 'desc').get().then((querySnapshot) => {
-    newsContainer.innerHTML = ''; 
     querySnapshot.forEach((doc) => {
       const news = doc.data();
       const newsDiv = document.createElement('div');
@@ -19,10 +21,11 @@ const loadNews = () => {
       newsContainer.appendChild(newsDiv);
     });
   }).catch((error) => {
-    console.error("حدث خطأ في جلب الأخبار: ", error);
+    console.error("حدث خطأ أثناء تحميل الأخبار: ", error);
   });
 };
 
+// دالة لإظهار التعليقات
 const showComments = (newsId) => {
   const commentsSection = document.getElementById(`comments-${newsId}`);
   db.collection('news').doc(newsId).collection('comments').get().then((querySnapshot) => {
@@ -34,11 +37,10 @@ const showComments = (newsId) => {
       commentDiv.innerHTML = `<p>${comment.text}</p>`;
       commentsSection.appendChild(commentDiv);
     });
-  }).catch((error) => {
-    console.error("حدث خطأ في جلب التعليقات: ", error);
   });
 };
 
+// دالة لإضافة تعليق
 const addComment = (newsId) => {
   const newCommentInput = document.getElementById(`new-comment-${newsId}`);
   const newComment = newCommentInput.value;
@@ -59,5 +61,5 @@ const addComment = (newsId) => {
   });
 };
 
-// استدعاء الدالة لتحميل الأخبار عند تحميل الصفحة
+// تحميل الأخبار عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', loadNews);
