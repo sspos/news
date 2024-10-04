@@ -1,6 +1,8 @@
 const loadNews = () => {
   const newsContainer = document.getElementById('news-container');
-  db.collection('news').get().then((querySnapshot) => {
+  
+  // جلب الأخبار وترتيبها حسب timestamp (التاريخ)
+  db.collection('news').orderBy('timestamp', 'desc').get().then((querySnapshot) => {
     newsContainer.innerHTML = ''; 
     querySnapshot.forEach((doc) => {
       const news = doc.data();
@@ -16,6 +18,8 @@ const loadNews = () => {
       `;
       newsContainer.appendChild(newsDiv);
     });
+  }).catch((error) => {
+    console.error("حدث خطأ في جلب الأخبار: ", error);
   });
 };
 
@@ -30,6 +34,8 @@ const showComments = (newsId) => {
       commentDiv.innerHTML = `<p>${comment.text}</p>`;
       commentsSection.appendChild(commentDiv);
     });
+  }).catch((error) => {
+    console.error("حدث خطأ في جلب التعليقات: ", error);
   });
 };
 
@@ -53,4 +59,5 @@ const addComment = (newsId) => {
   });
 };
 
+// استدعاء الدالة لتحميل الأخبار عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', loadNews);
