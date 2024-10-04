@@ -5,8 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>وكالة سبوس الأخبارية</title>
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- Firebase SDKs -->
+    <script defer src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js"></script>
+
+    <!-- رابط ملف firebase-config.js -->
     <script defer src="firebase-config.js"></script>
-    <script defer src="app.js"></script>
 
     <!-- إضافة رابط الخط من Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
@@ -67,5 +73,70 @@
             <p>جميع الحقوق محفوظة لوكالة سبوس الأخبارية © 2024</p>
         </div>
     </footer>
+
+    <script>
+        // تحميل الأخبار من Firestore
+        const loadNews = () => {
+            const newsContainer = document.getElementById('news-container');
+            newsContainer.innerHTML = ''; // تفريغ المحتوى السابق
+
+            db.collection('news').orderBy('timestamp', 'desc').get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    const newsItem = doc.data();
+                    const newsDiv = document.createElement('div');
+                    newsDiv.classList.add('news-item');
+
+                    newsDiv.innerHTML = `
+                        <h3>${newsItem.title}</h3>
+                        <p>${newsItem.content}</p>
+                        <button onclick="showComments('${doc.id}')">عرض التعليقات</button>
+                        <div id="comments-${doc.id}" class="comments-section"></div>
+                        <textarea id="new-comment-${doc.id}" placeholder="اكتب تعليق..."></textarea>
+                        <button onclick="addComment('${doc.id}')">إضافة تعليق</button>
+                        <hr>
+                    `;
+                    newsContainer.appendChild(newsDiv);
+                });
+            }).catch((error) => {
+                console.error("خطأ في تحميل الأخبار: ", error);
+            });
+        };
+
+        const showComments = (newsId) => {
+            const commentsSection = document.getElementById(`comments-${newsId}`);
+            db.collection('news').doc(newsId).collection('comments').get().then((querySnapshot) => {
+                commentsSection.innerHTML = ''; 
+                querySnapshot.forEach((doc) => {
+                    const comment = doc.data();
+                    const commentDiv = document.createElement('div');
+                    commentDiv.classList.add('comment');
+                    commentDiv.innerHTML = `<p>${comment.text}</p>`;
+                    commentsSection.appendChild(commentDiv);
+                });
+            });
+        };
+
+        const addComment = (newsId) => {
+            const newCommentInput = document.getElementById(`new-comment-${newsId}`);
+            const newComment = newCommentInput.value;
+
+            if (newComment.trim() === '') {
+                alert("يرجى كتابة تعليق قبل الإضافة");
+                return;
+            }
+
+            db.collection('news').doc(newsId).collection('comments').add({
+                text: newComment
+            }).then(() => {
+                alert("تم إضافة التعليق بنجاح!");
+                newCommentInput.value = ''; 
+                showComments(newsId); 
+            }).catch((error) => {
+                console.error("حدث خطأ أثناء إضافة التعليق: ", error);
+            });
+        };
+
+        document.addEventListener('DOMContentLoaded', loadNews);
+    </script>
 </body>
 </html>
