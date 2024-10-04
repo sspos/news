@@ -5,21 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>نشر خبر</title>
-    <script defer src="firebase-config.js"></script>
-    <script defer src="admin.js"></script>
 
+    <!-- Firebase SDKs -->
+    <script defer src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
-    
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    
     <!-- رابط ملف firebase-config.js -->
-    <script src="firebase-config.js"></script>
+    <script defer src="firebase-config.js"></script>
 
-
-
+    <!-- رابط ملف admin.js -->
+    <script defer src="admin.js"></script>
     
+    <style>
+        /* إضافة CSS لمؤشر التحميل */
+        #loading {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: #555;
+        }
+    </style>
 </head>
 <body>
     <h2>نشر خبر جديد</h2>
@@ -31,8 +40,8 @@
         <button type="submit">نشر الخبر</button>
     </form>
 
+    <!-- مؤشر التحميل -->
+    <div id="loading">جارٍ النشر...</div>
 
-
-    <script src="admin.js"></script>
 </body>
 </html>
